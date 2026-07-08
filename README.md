@@ -2,6 +2,12 @@
 
 > Turn rough ideas into agent-reviewed blueprints, then run them as governed missions.
 
+> [!WARNING]
+> **Mock mode by default.** Real model providers and real tool execution are
+> disabled unless explicitly configured. Do not connect write-capable tools
+> (email, deploy, file/DB writes, shell, secrets) without first reviewing the
+> approval, audit, and permission controls. See [SECURITY.md](SECURITY.md).
+
 Mission Control OS (MCOS) is an open-source **agentic mission-control platform**.
 Ideas become blueprints, blueprints become missions, and a three-seat agent
 council collaborates under human oversight.

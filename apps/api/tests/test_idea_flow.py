@@ -40,6 +40,9 @@ def test_full_idea_to_mission_flow(client):
     assert final["idea_score"] is not None
     assert final["readiness_score"] is not None
 
+    # Idempotency: re-promoting the same idea must not create a duplicate mission.
+    assert client.post(f"/ideas/{iid}/promote-to-mission").status_code == 409
+
 
 def test_extract_before_council_conflicts(client):
     idea = client.post(

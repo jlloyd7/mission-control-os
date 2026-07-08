@@ -84,6 +84,39 @@ BBOM: dict[str, dict[str, Any]] = {
         "default_autonomy": "draft_only",
         "risk_level": "medium",
     },
+    "opus_4_8": {
+        "agent_key": "opus_4_8",
+        "can_do": [
+            "Deep implementation review",
+            "Turn plans into buildable engineering steps",
+            "Catch correctness and integration issues",
+            "Propose test strategy",
+        ],
+        "cannot_do_without_approval": [
+            "Merge code",
+            "Deploy",
+            "Access secrets",
+            "Run arbitrary shell commands",
+        ],
+        "default_autonomy": "recommend_only",
+        "risk_level": "medium",
+    },
+    "sonnet_5": {
+        "agent_key": "sonnet_5",
+        "can_do": [
+            "Fast drafting of UI, components, and copy",
+            "Produce simple shippable first versions",
+            "Prototype quickly within the shared schema",
+        ],
+        "cannot_do_without_approval": [
+            "Merge code",
+            "Deploy",
+            "Access secrets",
+            "Modify live customer data",
+        ],
+        "default_autonomy": "draft_only",
+        "risk_level": "medium",
+    },
 }
 
 AGENTS = [
@@ -116,6 +149,26 @@ AGENTS = [
         "autonomy_level": "draft_only",
         "risk_level": "medium",
         "prompt_file": "arty.md",
+    },
+    {
+        "key": "opus_4_8",
+        "name": "Opus 4.8",
+        "persona": "Engineer / Deep Reviewer",
+        "provider": settings.opus_provider,
+        "model_name": settings.opus_model,
+        "autonomy_level": "recommend_only",
+        "risk_level": "medium",
+        "prompt_file": "opus.md",
+    },
+    {
+        "key": "sonnet_5",
+        "name": "Sonnet 5",
+        "persona": "Fast Maker",
+        "provider": settings.sonnet_provider,
+        "model_name": settings.sonnet_model,
+        "autonomy_level": "draft_only",
+        "risk_level": "medium",
+        "prompt_file": "sonnet.md",
     },
 ]
 

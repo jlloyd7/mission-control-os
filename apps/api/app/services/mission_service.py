@@ -27,6 +27,19 @@ def promote_to_mission(
     if blueprint is None:
         raise ValueError("No blueprint found. Generate a blueprint first.")
 
+    # Idempotency (P1.4): never create a silent duplicate mission for an idea.
+    existing = db.scalar(
+        select(models.Mission).where(
+            models.Mission.source_idea_id == idea.id,
+            models.Mission.status != "cancelled",
+        )
+    )
+    if existing is not None:
+        raise ValueError(
+            "This idea is already promoted to a mission. "
+            "Cancel the existing mission before re-promoting."
+        )
+
     mission = models.Mission(
         organization_id=org_id,
         source_idea_id=idea.id,

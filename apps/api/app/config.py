@@ -38,6 +38,10 @@ class Settings(BaseSettings):
     cipher_model: str = "claude-fable-5"
     arty_provider: str = "openai"
     arty_model: str = "gpt-5.6-sol-codex"
+    opus_provider: str = "anthropic"
+    opus_model: str = "claude-opus-4-8"
+    sonnet_provider: str = "anthropic"
+    sonnet_model: str = "claude-sonnet-5"
 
     # Keys (blank in mock mode)
     openai_api_key: str = ""

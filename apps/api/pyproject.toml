@@ -20,6 +20,11 @@ dev = [
     "pytest>=8",
     "pytest-asyncio>=0.23",
 ]
+# Real model providers — only needed when ENABLE_REAL_MODELS=true.
+real = [
+    "openai>=1.40",
+    "anthropic>=0.34",
+]
 # Real Postgres driver — only needed when you switch DATABASE_URL off SQLite.
 postgres = [
     "psycopg[binary]>=3.2",
