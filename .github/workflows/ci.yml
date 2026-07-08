@@ -38,7 +38,10 @@ jobs:
         with:
           node-version: "20"
       - name: Install
-        run: pnpm install --frozen-lockfile
+        # Not --frozen-lockfile: the lockfile is generated on Windows and CI runs
+        # on Linux, whose native sharp/unrs-resolver binaries differ. pnpm resolves
+        # the correct per-OS binaries here; the committed lockfile is still the base.
+        run: pnpm install --no-frozen-lockfile
       - name: Typecheck
         run: pnpm --filter web exec tsc --noEmit
       - name: Build
