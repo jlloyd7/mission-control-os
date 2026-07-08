@@ -95,6 +95,14 @@ See [SECURITY.md](SECURITY.md).
 Early-stage skeleton. The P0 target is a working mock vertical slice. See the
 detailed build plan in [`mission-control-os-build-plan.md`](mission-control-os-build-plan.md).
 
+## Author
+
+Created and maintained by [@jlloyd7](https://github.com/jlloyd7).
+
+## License
+
+[Apache-2.0](LICENSE) © 2026 jlloyd7 and contributors.
+
 ## License
 
 [Apache-2.0](LICENSE).
