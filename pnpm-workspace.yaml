@@ -1,0 +1,8 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# Approve native build scripts for these deps (pnpm 11 blocks by default).
+allowBuilds:
+  sharp: true
+  unrs-resolver: true

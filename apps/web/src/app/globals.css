@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Mission Control OS — command-center design system (dark, high-res)
+--------------------------------------------------------------------------- */
+@theme {
+  --color-bg: #06090f;
+  --color-bg-2: #0a0e16;
+  --color-panel: #0e141f;
+  --color-panel-2: #131c2b;
+  --color-line: #1e2a3c;
+  --color-line-soft: #17202e;
+
+  --color-text: #e8eff8;
+  --color-muted: #93a2b8;
+  --color-faint: #5e6b7e;
+
+  --color-accent: #35d6c4;
+  --color-accent-2: #4aa8ff;
+
+  --color-george: #f5b53f;
+  --color-cipher: #a78bfa;
+  --color-arty: #38bdf8;
+
+  --color-ok: #34d399;
+  --color-run: #fbbf24;
+  --color-fail: #fb7185;
+  --color-pending: #94a3b8;
+  --color-info: #56b6ff;
+
+  --color-risk-low: #34d399;
+  --color-risk-medium: #fbbf24;
+  --color-risk-high: #fb923c;
+  --color-risk-critical: #fb7185;
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --radius: 14px;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(1100px 560px at 82% -12%, rgba(53, 214, 196, 0.07), transparent 60%),
+    radial-gradient(820px 460px at -5% -5%, rgba(74, 168, 255, 0.06), transparent 55%),
+    var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  color: #fff;
+}
+
+/* console grid backdrop */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size: 46px 46px;
+}
+
+/* panels */
+.panel {
+  background: linear-gradient(180deg, var(--color-panel-2), var(--color-panel));
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+}
+.panel-flat {
+  background: var(--color-panel);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+}
+.hairline {
+  border: 1px solid var(--color-line);
+}
+.divide-line > * + * {
+  border-top: 1px solid var(--color-line-soft);
+}
+
+/* command-center micro-label */
+.label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 10.5px;
+  line-height: 1;
+  color: var(--color-faint);
+}
+.mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+/* status light with soft glow */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: currentColor;
+  box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 16%, transparent),
+    0 0 10px color-mix(in srgb, currentColor 55%, transparent);
+}
+
+.card-hover {
+  transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
+}
+.card-hover:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-line));
+  transform: translateY(-1px);
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--color-accent) 65%, transparent);
+  outline-offset: 2px;
+}
+
+/* thin scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #223047;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2c3d59;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.animate-pulse-dot {
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-panel-2);
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+  animation: shimmer 1.4s infinite;
+}
