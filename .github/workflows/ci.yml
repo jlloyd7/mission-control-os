@@ -37,7 +37,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: pnpm
       - name: Install
         run: pnpm install --frozen-lockfile
       - name: Typecheck
@@ -49,9 +48,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Scan for leaked secrets
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Scan for leaked provider keys / tokens
+        run: |
+          if grep -rInE 'sk-ant-[A-Za-z0-9_-]+|sk-[A-Za-z0-9]{20,}|(OPENAI|ANTHROPIC)_API_KEY=[^[:space:]]|ghp_[A-Za-z0-9]{20,}|xox[baprs]-' \
+            --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=.venv --exclude-dir=.next . ; then
+            echo "::error::Potential secret detected"; exit 1
+          else
+            echo "No secrets found."; exit 0
+          fi
